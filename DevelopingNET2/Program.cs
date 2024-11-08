@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,22 +21,22 @@ namespace DevelopingNET2
                 {
                     new Thread(() =>
                     {
-                        Client.SendMsg($"{args[0]} {i}");
+                        string input;
+                        while (true)
+                        {
+                            input = Console.ReadLine();
+
+                            if (input?.Trim().ToLower() == "exit")
+                            {
+                                Console.WriteLine("Клиент завершает работу.");
+                                break;
+                            }
+
+                            Client.SendMsg($"{args[0]}: {input}");
+                        }
                     }).Start();
-                }
-                string input;
-                while (true)
-                {
-                    Console.Write("Введите сообщение (или 'Exit' для выхода): ");
-                    input = Console.ReadLine();
 
-                    if (input?.Trim().ToLower() == "exit")
-                    {
-                        Console.WriteLine("Клиент завершает работу.");
-                        break;
-                    }
                 }
-
             }
         }
     }
